@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="https://unpkg.com/jspsych@7.3.4"></script>
+
+<link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.0.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.0.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.0.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-survey-text@1.0.0"></script>
+
+<script src="../dist/index.browser.js"></script>
+  </head>
+<script>
+var jsPsych = initJsPsych({
+      on_finish: function() {
+//       jsPsych.data.displayData();//comment out in the end
+      },
+      default_iti: 250,
+      show_progress_bar: true,
+      auto_update_progress_bar: false,
+      message_progress_bar: '',
+    });
+
+    var timeline = [];
+
+    var instructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<p style="max-width:800px; font-size: 1.2em; line-height: 1.4em;">Sie nehmen gerade an einem linguistischen Experiment teil; Ihre Antworten werden für wissenschaftliche Zwecke verarbeitet. Auf jeder Folie werden Ihnen 4 Worte angezeigt. Die 2 deutschen Worte sind Übersetzungen von 2 Worten aus einer unbekannten Sprache. Ihre Aufgabe ist es, die Worte korrekt zuzuordnen (per Drag-and-Drop), auch wenn Sie die Fremdsprache nicht kennen. Es gibt richtige Antworten. Nutzen Sie Ihre sprachliche Intuition. Sie können das Experiment jederzeit abbrechen. In diesem Fall werden keine Daten gespeichert.</p>',
+    choices: ['OK'],
+    button_html: '<button class="jspsych-btn" style="width:  10em; height:  3em; font-size:  1.2em; padding: 10px 20px;">%choice%</button>',
+    required: true,
+    on_start: function() {
+        // set progress bar to 0 at the start of experiment
+    jsPsych.setProgressBar(0);
+    }
+  };
+
+
+
+
+
+var rawdata = [
+{WordsL1: 'Oma', WordsL2: 'lulana', TagL2: '2284', TagL1: ''},
+{WordsL1: 'war', WordsL2: 'gron', TagL2: '1994', TagL1: ''},
+{WordsL1: 'was', WordsL2: 'pil', TagL2: '1935', TagL1: ''},
+{WordsL1: 'Zeit', WordsL2: 'looluu', TagL2: '1906', TagL1: ''},
+{WordsL1: 'Stirn', WordsL2: 'gomtuk', TagL2: '1391', TagL1: ''},
+{WordsL1: 'tat', WordsL2: 'pikta', TagL2: '2089', TagL1: ''},
+{WordsL1: 'Tag', WordsL2: 'pilu', TagL2: '1249', TagL1: ''},
+{WordsL1: 'Schuldner', WordsL2: 'gakro', TagL2: '1169', TagL1: ''},
+{WordsL1: 'Haus', WordsL2: 'ruumo', TagL2: '1105', TagL1: ''},
+{WordsL1: 'viel', WordsL2: 'loooombu', TagL2: '850', TagL1: ''},
+{WordsL1: 'Berg', WordsL2: 'grondu', TagL2: '893', TagL1: ''},
+{WordsL1: 'Lob', WordsL2: 'yelili', TagL2: '2307', TagL1: ''},
+{WordsL1: 'Name', WordsL2: 'yaluna', TagL2: '1942', TagL1: ''},
+{WordsL1: 'Kontakt', WordsL2: 'luliya', TagL2: '1473', TagL1: ''},
+{WordsL1: 'welcher', WordsL2: 'pikur', TagL2: '1035', TagL1: ''},
+{WordsL1: 'Lotos', WordsL2: 'lulooma', TagL2: '984', TagL1: ''},
+{WordsL1: 'Milchmann', WordsL2: 'lululuma', TagL2: '967', TagL1: ''},
+{WordsL1: 'etwas', WordsL2: 'buk', TagL2: '885', TagL1: ''},
+{WordsL1: 'ungreifbar', WordsL2: 'luhoomi', TagL2: '819', TagL1: ''},
+{WordsL1: 'höchstes Gut', WordsL2: 'ooluumee', TagL2: '781', TagL1: ''},
+{WordsL1: 'unbegrenzt', WordsL2: 'loomoongaa', TagL2: '739', TagL1: ''},
+{WordsL1: 'Umschlag', WordsL2: 'schulovog', TagL2: '639', TagL1: ''},
+{WordsL1: 'wieder', WordsL2: 'tikiti', TagL2: '14', TagL1: ''},
+{WordsL1: 'Zügel', WordsL2: 'gontu', TagL2: '14', TagL1: ''},
+{WordsL1: 'Sklave', WordsL2: 'gurthok', TagL2: '14', TagL1: ''},
+{WordsL1: 'Denkmal', WordsL2: 'gorunduu', TagL2: '14', TagL1: ''},
+{WordsL1: 'geplant', WordsL2: 'paktun', TagL2: '34', TagL1: ''},
+{WordsL1: 'Gestalt', WordsL2: 'borungu', TagL2: '14', TagL1: ''},
+{WordsL1: 'Betrüger', WordsL2: 'kratchek', TagL2: '14', TagL1: ''},
+{WordsL1: 'Märchen', WordsL2: 'luyanaa', TagL2: '14', TagL1: ''},
+{WordsL1: 'Bewegung', WordsL2: 'looana', TagL2: '5', TagL1: ''},
+{WordsL1: 'Fortschritt', WordsL2: 'lirivo', TagL2: '218', TagL1: ''},
+{WordsL1: 'Decke', WordsL2: 'luwana', TagL2: '14', TagL1: ''},
+{WordsL1: 'Asche', WordsL2: 'sissu', TagL2: '30', TagL1: ''},
+{WordsL1: 'später', WordsL2: 'looongu', TagL2: '15', TagL1: ''},
+{WordsL1: 'Arbeit', WordsL2: 'grukta', TagL2: '15', TagL1: ''},
+{WordsL1: 'Verkäufer', WordsL2: 'lorolix', TagL2: '15', TagL1: ''},
+{WordsL1: 'Spaziergang', WordsL2: 'looroomo', TagL2: '15', TagL1: ''},
+{WordsL1: 'Sprache', WordsL2: 'laliriba', TagL2: '75', TagL1: ''},
+{WordsL1: 'Fluss', WordsL2: 'luschuun', TagL2: '15', TagL1: ''},
+{WordsL1: 'allein', WordsL2: 'luuu', TagL2: '15', TagL1: ''},
+{WordsL1: 'Richtung', WordsL2: 'orutu', TagL2: '15', TagL1: ''},
+{WordsL1: 'Tod', WordsL2: 'ghruum', TagL2: '15', TagL1: ''},
+{WordsL1: 'Trauer', WordsL2: 'munolu', TagL2: '15', TagL1: ''},
+{WordsL1: 'Schnee', WordsL2: 'sloovo', TagL2: '15', TagL1: ''},
+{WordsL1: 'zusammen', WordsL2: 'yanumi', TagL2: '2', TagL1: ''},
+{WordsL1: 'Geschoss', WordsL2: 'zikrat', TagL2: '2', TagL1: ''},
+{WordsL1: 'dein', WordsL2: 'dunu', TagL2: '2', TagL1: ''},
+{WordsL1: 'ging', WordsL2: 'luloo', TagL2: '107', TagL1: ''},
+{WordsL1: 'Schmuck', WordsL2: 'lusinara', TagL2: '2', TagL1: ''},
+{WordsL1: 'fließen', WordsL2: 'schluuwa', TagL2: '2', TagL1: ''},
+{WordsL1: 'jetzt', WordsL2: 'tik', TagL2: '2', TagL1: ''},
+{WordsL1: 'Form', WordsL2: 'tikatu', TagL2: '3', TagL1: ''},
+{WordsL1: 'erschaffen', WordsL2: 'luyanara', TagL2: '2', TagL1: ''},
+{WordsL1: 'offizielles Dokument', WordsL2: 'tositu', TagL2: '2', TagL1: ''},
+{WordsL1: 'wissenschaftlich', WordsL2: 'pakintusoklarev', TagL2: '5', TagL1: ''},
+{WordsL1: 'Regierung', WordsL2: 'rombatu', TagL2: '2', TagL1: ''},
+{WordsL1: 'Herrscher', WordsL2: 'ruumon', TagL2: '2', TagL1: ''},
+{WordsL1: 'Welle', WordsL2: 'schololuu', TagL2: '2', TagL1: ''},
+{WordsL1: 'Ausgabe', WordsL2: 'alooza', TagL2: '2', TagL1: ''},
+{WordsL1: 'östlich', WordsL2: 'yaliru', TagL2: '103', TagL1: ''},
+{WordsL1: 'Szene', WordsL2: 'looeyah', TagL2: '12', TagL1: ''},
+{WordsL1: 'töten', WordsL2: 'kutap', TagL2: '2', TagL1: ''},
+{WordsL1: 'Arbeitnehmer', WordsL2: 'tapokilo', TagL2: '6', TagL1: ''},
+{WordsL1: 'Verdauung', WordsL2: 'olam', TagL2: '3', TagL1: ''},
+{WordsL1: 'Land', WordsL2: 'gruna', TagL2: '2', TagL1: ''},
+{WordsL1: 'Sorge', WordsL2: 'gruunoh', TagL2: '1', TagL1: ''},
+{WordsL1: 'Tier', WordsL2: 'rroobo', TagL2: '1', TagL1: ''}];
+
+var trialcount =34 ; // 34 for us needs to be less than or equal to 1/2 the number of word-couples
+var shuffleddata = jsPsych.randomization.repeat(rawdata, 1);
+var leftcol= shuffleddata.slice(0, trialcount);
+var rightcol= shuffleddata.slice(trialcount, 2*trialcount);
+var bottomswitches = jsPsych.randomization.sampleWithReplacement([true,false], trialcount);
+
+var stimuli=[];
+for(let i = 0; i < trialcount; i++) {
+    stimuli.push( {stimulustop: [leftcol[i].WordsL1, rightcol[i].WordsL1], stimulusbottom: [leftcol[i].WordsL2, rightcol[i].WordsL2], bottomswitch:bottomswitches[i],});
+ }
+
+
+
+    var trials = {
+      timeline_variables: stimuli,
+      randomize_order: false,
+      timeline: [
+        {
+          type: jsPsychPairsOfWords,
+          stimulustop: jsPsych.timelineVariable('stimulustop'),
+          stimulusbottom: jsPsych.timelineVariable('stimulusbottom'),
+          bottomswitch: jsPsych.timelineVariable('bottomswitch'),
+          buttonlabel: 'OK',
+          on_finish: function() {
+            // at the end of each trial, update the progress bar
+            // based on the current value and the proportion to update for each trial
+            var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
+            jsPsych.setProgressBar(curr_progress_bar_value + (1/trialcount));
+          },
+        }
+      ]
+    };
+
+
+
+
+
+    var gender = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [
+        {prompt: "Bitte geben Sie Ihr Geschlecht ein:", name: 'gender', options: ['Männlich','Weiblich','Divers'], required:true},
+      ],
+      button_label: 'OK'
+    };
+
+    var age = {
+      type: jsPsychSurveyText,
+      questions: [
+        {prompt: 'Bitte geben Sie Ihr Alter an', columns: 3, required: true, name: 'Age'},
+      ],
+      button_label: 'OK'
+    };
+
+
+
+var debrief_block = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: function() {
+    var trials = jsPsych.data.get().filter({trial_type:'PairsOfWords'});
+    var correct_trials = trials.filter({correct: true});
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+
+    return `<p>Sie haben in ${accuracy}% der Fälle richtig geantwortet.</p>`;
+
+  },
+  choices: ['Experiment abschliessen'],
+};
+
+timeline.push(instructions);
+timeline.push(trials);
+timeline.push(gender);
+timeline.push(age);
+timeline.push(debrief_block);
+
+jsPsych.run(timeline);
+  </script>
+</html>
